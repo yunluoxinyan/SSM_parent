@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+				        http://www.springframework.org/schema/context
+				        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <bean id="aladWorkerScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+          lazy-init="false" autowire="no" destroy-method="destroy">
+        <property name="triggers">
+            <list>
+                <ref bean="quartZWorkerJobTrigger"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="quartZWorker" class="com.mabiao.quartz.TestQuartZ"/>
+
+    <bean id="quartZWorkerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="quartZWorker"/>
+        <property name="targetMethod" value="run"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+
+    <bean id="quartZWorkerJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="quartZWorkerJob"/>
+        <property name="cronExpression" value="0/6 * * * * ?"/>
+    </bean>
+
+</beans>
