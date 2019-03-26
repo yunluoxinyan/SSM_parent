@@ -34,7 +34,7 @@ public class SearchTest {
 //	}
 //
 //	private static String str1 = null;
-
+/*
 	public static void main(String[] args) {
 		String gbk = URLEncodeUtil.encode("机车夹克","gbk");
 //		String gbk = URLEncodeUtil.encode("连衣裙", "GBK");
@@ -46,26 +46,28 @@ public class SearchTest {
 //		str1 = "123";
 //		change(str1);
 //		System.out.println(gbk);
-	}
+	}*/
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		Integer opTotal;
-		String url = "http://10.187.52.155/promo/nologinmgets?source=toplife&origin=1&skuids=4311729";
-		String res = HttpClientUtil.getDataFromUrl(url, "GBK");
-		String resultInfo = res.substring(1,res.length()-1);
+		String url = "http://list.api.jd.local/attr/get?cat=870&grade=3";
+		String res = HttpClientUtil.getDataFromUrl1(url, "utf-8");
+//		String resultInfo = res.substring(1,res.length()-1);
 		if ("ERROR".equals(res)) {
 			//失败后显示特惠按钮以便下次查找
 			opTotal = 1;
+			System.out.println("error");
 		} else {
-			Map resMap = JsonUtil.toObject(resultInfo, Map.class);
-			if (resMap == null) {
-				opTotal = 1;
-				System.out.println(opTotal);
-			} else {
-				System.out.println("true");
-			}
+//			Map resMap = JsonUtil.toObject(resultInfo, Map.class);
+//			if (resMap == null) {
+//				opTotal = 1;
+//				System.out.println(opTotal);
+//			} else {
+//				System.out.println("true");
+//			}
+			System.out.println(res);
 		}
-	}*/
+	}
 
 	public static void change(String str) {
 		str = "welcome";

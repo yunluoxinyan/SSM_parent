@@ -18,8 +18,7 @@ public class TestController extends BaseController {
 
     @Test
     public void test1() {
-        int i = 1;
-        long j = 2L;
-        System.out.println(i + j);
+        Integer i = null;
+        System.out.println(i != -1);
     }
 }

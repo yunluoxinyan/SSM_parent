@@ -41,4 +41,29 @@ public class HttpClientUtil {
 			return "ERROR";
 		}
 	}
+
+	public static String getDataFromUrl1(String url, String encoding) {
+		HttpClient httpClient = new HttpClient();
+		httpClient.getParams().setContentCharset(encoding);
+		PostMethod post = new PostMethod(url);
+		try {
+			int statusCode = httpClient.executeMethod(post);
+			if (statusCode != HttpStatus.SC_OK) {
+				return "ERROR";
+			}
+			//return post.getResponseBodyAsString();
+			InputStream inputStream = post.getResponseBodyAsStream();
+			BufferedReader bufferReader = new BufferedReader(new InputStreamReader(inputStream, encoding));
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			while ((line = bufferReader.readLine()) != null) {
+				sb.append(line);
+			}
+			bufferReader.close();
+			return sb.toString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return "ERROR";
+		}
+	}
 }
